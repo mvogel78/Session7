@@ -281,6 +281,8 @@ babies[1:2,] ## the first two rows
 ```
 
 
+---
+
 
 
 ```r
@@ -554,45 +556,6 @@ birth weight on the y-axis.
 
 
 
-```r
-library(dplyr)
-load("kromeyer.rdata")
-```
-
-```
-## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-## 'kromeyer.rdata', probable reason 'No such file or directory'
-```
-
-```
-## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
-```
-
-```r
-kh %>% group_by(GRP) %>%
-  summarise(
-    mean.age = mean(AGE)
-  )
-```
-
-```
-## Source: local data frame [52 x 2]
-## 
-##      GRP  mean.age
-##    (chr)     (dbl)
-## 1  A2_01  1.021384
-## 2  A2_02  2.045535
-## 3  A2_03  3.020899
-## 4  A2_04  4.029701
-## 5  A2_05  5.001055
-## 6  A2_06  5.999639
-## 7  A2_07  6.981292
-## 8  A2_08  8.005000
-## 9  A2_09  9.007604
-## 10 A2_10 10.016805
-## ..   ...       ...
-```
-
 
 ---
 
@@ -605,18 +568,7 @@ kh %>% group_by(GRP) %>%
 ```r
 library(dplyr)
 load("kromeyer.rdata")
-```
 
-```
-## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-## 'kromeyer.rdata', probable reason 'No such file or directory'
-```
-
-```
-## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
-```
-
-```r
 kh %>% group_by(GRP) %>%
   summarise(
     mean.age = mean(AGE),
@@ -625,29 +577,9 @@ kh %>% group_by(GRP) %>%
   )
 ```
 
-```
-## Source: local data frame [52 x 4]
-## 
-##      GRP  mean.age    sd.age    mean.bmi
-##    (chr)     (dbl)     (dbl)       (dbl)
-## 1  A2_01  1.021384 0.1330108 -0.15201664
-## 2  A2_02  2.045535 0.1996221  0.20183894
-## 3  A2_03  3.020899 0.2464404  0.19183243
-## 4  A2_04  4.029701 0.2783127  0.02653699
-## 5  A2_05  5.001055 0.2785712 -0.06919697
-## 6  A2_06  5.999639 0.2922610 -0.12445894
-## 7  A2_07  6.981292 0.2847638 -0.12194258
-## 8  A2_08  8.005000 0.2894536 -0.16207127
-## 9  A2_09  9.007604 0.2846261 -0.07326987
-## 10 A2_10 10.016805 0.2841343 -0.04130684
-## ..   ...       ...       ...         ...
-```
-
 
 ---
 
-
----
 
 
 ## Exercise
@@ -670,29 +602,6 @@ library(reshape2)
 kh %>% melt() %>% dcast(variable ~ sex, mean, na.rm = T)
 ```
 
-```
-## Using SIC, sex, GRP, UID as id variables
-```
-
-```
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
-```
-
-```
-##       variable         male       female
-## 1       gebdat 1.145481e+09 1.128765e+09
-## 2         EDAT 1.395447e+09 1.393546e+09
-## 3          AGE 7.926311e+00 8.396155e+00
-## 4      AGE_REF 7.924911e+00 8.392775e+00
-## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02
-## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02
-## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01
-## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01
-## 9     BMI_ORIG 1.811027e+01 1.840815e+01
-## 10     BMI_SDS 1.307451e-01 1.838844e-01
-```
-
 
 ---
 
@@ -704,29 +613,6 @@ kh %>% melt() %>% dcast(variable ~ sex, mean, na.rm = T)
 
 ```r
 kh %>% melt() %>% dcast(variable ~ sex, margins = "sex", mean, na.rm = T)
-```
-
-```
-## Using SIC, sex, GRP, UID as id variables
-```
-
-```
-## Warning: attributes are not identical across measure variables; they will
-## be dropped
-```
-
-```
-##       variable         male       female        (all)
-## 1       gebdat 1.145481e+09 1.128765e+09 1.137286e+09
-## 2         EDAT 1.395447e+09 1.393546e+09 1.394515e+09
-## 3          AGE 7.926311e+00 8.396155e+00 8.156653e+00
-## 4      AGE_REF 7.924911e+00 8.392775e+00 8.154282e+00
-## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02 1.265438e+02
-## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02 1.083725e-01
-## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01 3.368533e+01
-## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01 1.758610e-01
-## 9     BMI_ORIG 1.811027e+01 1.840815e+01 1.825634e+01
-## 10     BMI_SDS 1.307451e-01 1.838844e-01 1.568019e-01
 ```
 
 

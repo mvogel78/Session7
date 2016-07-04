@@ -198,6 +198,8 @@ babies[1:2,] ## the first two rows
 ```
 
 
+---
+
 
 ```{r}
 babies[1:2,c(1,3)] ## the first and third column for the first two rows
@@ -383,16 +385,6 @@ birth weight on the y-axis.
 - then we group the data frame by the `GRP` column (scientific group) and calculate the mean of `AGE`
 
 
-```{r}
-library(dplyr)
-load("kromeyer.rdata")
-
-kh %>% group_by(GRP) %>%
-  summarise(
-    mean.age = mean(AGE)
-  )
-
-```
 
 
 ---
@@ -402,7 +394,7 @@ kh %>% group_by(GRP) %>%
 
 - we can calculate more than one summary statistic
 
-```{r}
+```{r, eval=FALSE}
 library(dplyr)
 load("kromeyer.rdata")
 
@@ -419,8 +411,6 @@ kh %>% group_by(GRP) %>%
 ---
 
 
----
-
 
 ## Exercise
 
@@ -436,7 +426,7 @@ kh %>% group_by(GRP) %>%
 - another way to do the same is
 
 
-```{r}
+```{r,eval=FALSE}
 library(reshape2)
 kh %>% melt() %>% dcast(variable ~ sex, mean, na.rm = T)
 ```
@@ -449,7 +439,7 @@ kh %>% melt() %>% dcast(variable ~ sex, mean, na.rm = T)
 
 
 
-```{r}
+```{r,eval=FALSE}
 kh %>% melt() %>% dcast(variable ~ sex, margins = "sex", mean, na.rm = T)
 ```
 

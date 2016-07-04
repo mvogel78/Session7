@@ -13,8 +13,7 @@
     media="only screen and (max-device-width: 480px)" >
   <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
   <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
-  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
-
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  
   
   <!-- Grab CDN jQuery, fall back to local if offline -->
   <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
@@ -335,7 +334,13 @@ babies$drace &lt;- recode(babies$drace,
 ##   smoke (chr), time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
 </code></pre>
 
-<pre><code class="r">babies[1:2,c(1,3)] ## the first and third column for the first two rows
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
+  <article data-timings="">
+    <pre><code class="r">babies[1:2,c(1,3)] ## the first and third column for the first two rows
 </code></pre>
 
 <pre><code>## Source: local data frame [2 x 2]
@@ -350,7 +355,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -364,7 +369,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -393,7 +398,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -418,7 +423,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -452,7 +457,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Recode Missings</h2>
   </hgroup>
@@ -470,7 +475,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Recode Missings</h2>
   </hgroup>
@@ -487,7 +492,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Recode Missings</h2>
   </hgroup>
@@ -508,7 +513,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-24" style="background:;">
+<slide class="" id="slide-25" style="background:;">
   <hgroup>
     <h2>Exercise</h2>
   </hgroup>
@@ -519,7 +524,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-26" style="background:;">
   <hgroup>
     <h2>Solution</h2>
   </hgroup>
@@ -540,7 +545,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-26" style="background:;">
+<slide class="" id="slide-27" style="background:;">
   <hgroup>
     <h2>cut a numeric vector</h2>
   </hgroup>
@@ -565,7 +570,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-27" style="background:;">
+<slide class="" id="slide-28" style="background:;">
   <hgroup>
     <h2>Exercise</h2>
   </hgroup>
@@ -577,7 +582,7 @@ birth weight on the y-axis.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue" id="slide-28" style="background:grey;">
+<slide class="segue" id="slide-29" style="background:grey;">
   <hgroup>
     <h1>Reshaping and summarising data</h1>
   </hgroup>
@@ -587,7 +592,7 @@ birth weight on the y-axis.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-29" style="background:;">
+<slide class="" id="slide-30" style="background:;">
   <hgroup>
     <h2>dplyr and reshape2</h2>
   </hgroup>
@@ -603,7 +608,7 @@ birth weight on the y-axis.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-30" style="background:;">
+<slide class="" id="slide-31" style="background:;">
   <hgroup>
     <h2>dplyr and reshape2</h2>
   </hgroup>
@@ -613,45 +618,11 @@ birth weight on the y-axis.</p>
 <li>then we group the data frame by the <code>GRP</code> column (scientific group) and calculate the mean of <code>AGE</code></li>
 </ul>
 
-<pre><code class="r">library(dplyr)
-load(&quot;kromeyer.rdata&quot;)
-</code></pre>
-
-<pre><code>## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-## &#39;kromeyer.rdata&#39;, probable reason &#39;No such file or directory&#39;
-</code></pre>
-
-<pre><code>## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
-</code></pre>
-
-<pre><code class="r">kh %&gt;% group_by(GRP) %&gt;%
-  summarise(
-    mean.age = mean(AGE)
-  )
-</code></pre>
-
-<pre><code>## Source: local data frame [52 x 2]
-## 
-##      GRP  mean.age
-##    (chr)     (dbl)
-## 1  A2_01  1.021384
-## 2  A2_02  2.045535
-## 3  A2_03  3.020899
-## 4  A2_04  4.029701
-## 5  A2_05  5.001055
-## 6  A2_06  5.999639
-## 7  A2_07  6.981292
-## 8  A2_08  8.005000
-## 9  A2_09  9.007604
-## 10 A2_10 10.016805
-## ..   ...       ...
-</code></pre>
-
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-31" style="background:;">
+<slide class="" id="slide-32" style="background:;">
   <hgroup>
     <h2>dplyr and reshape2</h2>
   </hgroup>
@@ -662,16 +633,8 @@ load(&quot;kromeyer.rdata&quot;)
 
 <pre><code class="r">library(dplyr)
 load(&quot;kromeyer.rdata&quot;)
-</code></pre>
 
-<pre><code>## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
-## &#39;kromeyer.rdata&#39;, probable reason &#39;No such file or directory&#39;
-</code></pre>
-
-<pre><code>## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
-</code></pre>
-
-<pre><code class="r">kh %&gt;% group_by(GRP) %&gt;%
+kh %&gt;% group_by(GRP) %&gt;%
   summarise(
     mean.age = mean(AGE),
     sd.age = sd(AGE),
@@ -679,30 +642,6 @@ load(&quot;kromeyer.rdata&quot;)
   )
 </code></pre>
 
-<pre><code>## Source: local data frame [52 x 4]
-## 
-##      GRP  mean.age    sd.age    mean.bmi
-##    (chr)     (dbl)     (dbl)       (dbl)
-## 1  A2_01  1.021384 0.1330108 -0.15201664
-## 2  A2_02  2.045535 0.1996221  0.20183894
-## 3  A2_03  3.020899 0.2464404  0.19183243
-## 4  A2_04  4.029701 0.2783127  0.02653699
-## 5  A2_05  5.001055 0.2785712 -0.06919697
-## 6  A2_06  5.999639 0.2922610 -0.12445894
-## 7  A2_07  6.981292 0.2847638 -0.12194258
-## 8  A2_08  8.005000 0.2894536 -0.16207127
-## 9  A2_09  9.007604 0.2846261 -0.07326987
-## 10 A2_10 10.016805 0.2841343 -0.04130684
-## ..   ...       ...       ...         ...
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-32" style="background:;">
-  <article data-timings="">
-    
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -732,26 +671,6 @@ load(&quot;kromeyer.rdata&quot;)
 kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
 </code></pre>
 
-<pre><code>## Using SIC, sex, GRP, UID as id variables
-</code></pre>
-
-<pre><code>## Warning: attributes are not identical across measure variables; they will
-## be dropped
-</code></pre>
-
-<pre><code>##       variable         male       female
-## 1       gebdat 1.145481e+09 1.128765e+09
-## 2         EDAT 1.395447e+09 1.393546e+09
-## 3          AGE 7.926311e+00 8.396155e+00
-## 4      AGE_REF 7.924911e+00 8.392775e+00
-## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02
-## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02
-## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01
-## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01
-## 9     BMI_ORIG 1.811027e+01 1.840815e+01
-## 10     BMI_SDS 1.307451e-01 1.838844e-01
-</code></pre>
-
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -764,26 +683,6 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     <pre><code class="r">kh %&gt;% melt() %&gt;% dcast(variable ~ sex, margins = &quot;sex&quot;, mean, na.rm = T)
 </code></pre>
 
-<pre><code>## Using SIC, sex, GRP, UID as id variables
-</code></pre>
-
-<pre><code>## Warning: attributes are not identical across measure variables; they will
-## be dropped
-</code></pre>
-
-<pre><code>##       variable         male       female        (all)
-## 1       gebdat 1.145481e+09 1.128765e+09 1.137286e+09
-## 2         EDAT 1.395447e+09 1.393546e+09 1.394515e+09
-## 3          AGE 7.926311e+00 8.396155e+00 8.156653e+00
-## 4      AGE_REF 7.924911e+00 8.392775e+00 8.154282e+00
-## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02 1.265438e+02
-## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02 1.083725e-01
-## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01 3.368533e+01
-## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01 1.758610e-01
-## 9     BMI_ORIG 1.811027e+01 1.840815e+01 1.825634e+01
-## 10     BMI_SDS 1.307451e-01 1.838844e-01 1.568019e-01
-</code></pre>
-
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -794,7 +693,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title=''>
+        data-slide=1 title='NA'>
          1
       </a>
     </li>
@@ -860,7 +759,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title=''>
+        data-slide=12 title='NA'>
          12
       </a>
     </li>
@@ -884,13 +783,13 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title=''>
+        data-slide=16 title='NA'>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='Logical Indexing'>
+        data-slide=17 title='NA'>
          17
       </a>
     </li>
@@ -914,7 +813,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=21 title='Recode Missings'>
+        data-slide=21 title='Logical Indexing'>
          21
       </a>
     </li>
@@ -932,37 +831,37 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='Exercise'>
+        data-slide=24 title='Recode Missings'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title='Solution'>
+        data-slide=25 title='Exercise'>
          25
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=26 title='cut a numeric vector'>
+        data-slide=26 title='Solution'>
          26
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=27 title='Exercise'>
+        data-slide=27 title='cut a numeric vector'>
          27
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=28 title='Reshaping and summarising data'>
+        data-slide=28 title='Exercise'>
          28
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='dplyr and reshape2'>
+        data-slide=29 title='Reshaping and summarising data'>
          29
       </a>
     </li>
@@ -980,7 +879,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title=''>
+        data-slide=32 title='dplyr and reshape2'>
          32
       </a>
     </li>
