@@ -57,6 +57,17 @@ strong {
 
 <slide class="segue" id="slide-2" style="background:grey;">
   <hgroup>
+    <h1>Exkurs</h1>
+  </hgroup>
+  <article data-timings="">
+    <p>Graphics (line)</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-3" style="background:grey;">
+  <hgroup>
     <h1>Recap</h1>
   </hgroup>
   <article data-timings="">
@@ -65,7 +76,7 @@ strong {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-3" style="background:;">
+<slide class="" id="slide-4" style="background:;">
   <hgroup>
     <h2>Recap</h2>
   </hgroup>
@@ -81,20 +92,23 @@ strong {
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-4" style="background:;">
+<slide class="" id="slide-5" style="background:;">
   <hgroup>
     <h2>Recap</h2>
   </hgroup>
   <article data-timings="">
     <pre><code class="r">library(readxl)
 babies &lt;- read_excel(&quot;../session7dta/babies.xlsx&quot;,1)
+babies$sex.mf &lt;- factor(babies$sex, 
+                        levels = c(0,1),
+                        labels = c(&quot;male&quot;,&quot;female&quot;))
 </code></pre>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-5" style="background:;">
+<slide class="" id="slide-6" style="background:;">
   <hgroup>
     <h2>Recap factors</h2>
   </hgroup>
@@ -113,7 +127,7 @@ babies &lt;- read_excel(&quot;../session7dta/babies.xlsx&quot;,1)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-6" style="background:;">
+<slide class="" id="slide-7" style="background:;">
   <hgroup>
     <h2>Solution</h2>
   </hgroup>
@@ -134,7 +148,7 @@ babies$inc &lt;- factor(babies$inc,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-7" style="background:;">
+<slide class="" id="slide-8" style="background:;">
   <hgroup>
     <h2>Solution</h2>
   </hgroup>
@@ -178,30 +192,36 @@ babies$inc &lt;- factor(babies$inc,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-8" style="background:;">
+<slide class="" id="slide-9" style="background:;">
   <hgroup>
     <h2>change labels</h2>
   </hgroup>
   <article data-timings="">
-    <pre><code class="r">babies$sex.jm &lt;- factor(babies$sex.mf, 
-                        levels = c(&quot;male&quot;,&quot;female&quot;),
-                        labels = c(&quot;Junge&quot;,&quot;Maedchen&quot;))
+    <pre><code class="r">table(babies$sex.mf)
 </code></pre>
 
-<pre><code>## Error in `$&lt;-.data.frame`(`*tmp*`, &quot;sex.jm&quot;, value = structure(integer(0), .Label = c(&quot;Junge&quot;, : replacement has 0 rows, data has 1236
+<pre><code>## 
+##   male female 
+##    626    610
 </code></pre>
 
-<pre><code class="r">table(babies$sex.jm,babies$sex.mf)
+<pre><code class="r">babies$sex.mj &lt;- factor(babies$sex.mf, 
+                        levels = c(&quot;female&quot;,&quot;male&quot;),
+                          labels = c(&quot;Maedchen&quot;,&quot;Junge&quot;))
+table(babies$sex.mj,babies$sex.mf)
 </code></pre>
 
-<pre><code>## &lt; table of extent 0 x 0 &gt;
+<pre><code>##           
+##            male female
+##   Maedchen    0    610
+##   Junge     626      0
 </code></pre>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-9" style="background:;">
+<slide class="" id="slide-10" style="background:;">
   <hgroup>
     <h2>Exercise</h2>
   </hgroup>
@@ -212,7 +232,7 @@ babies$inc &lt;- factor(babies$inc,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-10" style="background:;">
+<slide class="" id="slide-11" style="background:;">
   <hgroup>
     <h2>recoding</h2>
   </hgroup>
@@ -227,7 +247,7 @@ babies$inc &lt;- factor(babies$inc,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-11" style="background:;">
+<slide class="" id="slide-12" style="background:;">
   <article data-timings="">
     <pre><code class="r">library(car)
 babies$drace &lt;- recode(babies$drace,
@@ -239,7 +259,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-12" style="background:;">
+<slide class="" id="slide-13" style="background:;">
   <hgroup>
     <h2>Exercise</h2>
   </hgroup>
@@ -252,7 +272,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-13" style="background:;">
+<slide class="" id="slide-14" style="background:;">
   <hgroup>
     <h2>Solution</h2>
   </hgroup>
@@ -269,7 +289,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-14" style="background:;">
+<slide class="" id="slide-15" style="background:;">
   <hgroup>
     <h2>recoding missings</h2>
   </hgroup>
@@ -287,35 +307,11 @@ babies$drace &lt;- recode(babies$drace,
 <pre><code class="r">babies[2,1] ## the second element of the first column
 </code></pre>
 
-<pre><code>## [1] 20
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-15" style="background:;">
-  <article data-timings="">
-    <pre><code class="r">babies[1:2,] ## the first two rows
-</code></pre>
-
-<pre><code>##   id pluralty outcome date gestation sex  wt parity  race age ed ht wt1
-## 1 15        5       1 1411       284   0 120      1 asian  27  5 62 100
-## 2 20        5       1 1499       282   1 113      2 white  33  5 64 135
-##   drace dage ded dht dwt marital  inc smoke time number      bwt sex.mf
-## 1 asian   31   5  65 110    &lt;NA&gt; &lt;NA&gt; never    0  never 3.401939   male
-## 2 white   38   5  70 148    &lt;NA&gt; &lt;NA&gt; never    0  never 3.203493 female
-##     sex.jm
-## 1    Junge
-## 2 Maedchen
-</code></pre>
-
-<pre><code class="r">babies[1:2,c(1,3)] ## the first and third column for the first two rows
-</code></pre>
-
-<pre><code>##   id outcome
-## 1 15       1
-## 2 20       1
+<pre><code>## Source: local data frame [1 x 1]
+## 
+##      id
+##   (dbl)
+## 1    20
 </code></pre>
 
   </article>
@@ -323,6 +319,37 @@ babies$drace &lt;- recode(babies$drace,
 </slide>
 
 <slide class="" id="slide-16" style="background:;">
+  <article data-timings="">
+    <pre><code class="r">babies[1:2,] ## the first two rows
+</code></pre>
+
+<pre><code>## Source: local data frame [2 x 25]
+## 
+##      id pluralty outcome  date gestation   sex    wt parity  race   age
+##   (dbl)    (dbl)   (dbl) (dbl)     (dbl) (dbl) (dbl)  (dbl) (chr) (dbl)
+## 1    15        5       1  1411       284     0   120      1 asian    27
+## 2    20        5       1  1499       282     1   113      2 white    33
+## Variables not shown: ed (dbl), ht (dbl), wt1 (dbl), drace (chr), dage
+##   (dbl), ded (dbl), dht (dbl), dwt (dbl), marital (fctr), inc (fctr),
+##   smoke (chr), time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
+</code></pre>
+
+<pre><code class="r">babies[1:2,c(1,3)] ## the first and third column for the first two rows
+</code></pre>
+
+<pre><code>## Source: local data frame [2 x 2]
+## 
+##      id outcome
+##   (dbl)   (dbl)
+## 1    15       1
+## 2    20       1
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-17" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -336,12 +363,12 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-17" style="background:;">
+<slide class="" id="slide-18" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
   <article data-timings="">
-    <ul class = "build incremental">
+    <ul>
 <li>Problem: get all ids of babies with a birth weight &gt; 4</li>
 <li>Solution: instead of numbers as indices we use conditions </li>
 </ul>
@@ -365,7 +392,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-18" style="background:;">
+<slide class="" id="slide-19" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -377,18 +404,20 @@ babies$drace &lt;- recode(babies$drace,
 <pre><code class="r">babies[babies$bwt &gt; 5,]
 </code></pre>
 
-<pre><code>##  [1] id        pluralty  outcome   date      gestation sex       wt       
-##  [8] parity    race      age       ed        ht        wt1       drace    
-## [15] dage      ded       dht       dwt       marital   inc       smoke    
-## [22] time      number    bwt       sex.mf    sex.jm   
-## &lt;0 rows&gt; (or 0-length row.names)
+<pre><code>## Source: local data frame [0 x 25]
+## 
+## Variables not shown: id (dbl), pluralty (dbl), outcome (dbl), date (dbl),
+##   gestation (dbl), sex (dbl), wt (dbl), parity (dbl), race (chr), age
+##   (dbl), ed (dbl), ht (dbl), wt1 (dbl), drace (chr), dage (dbl), ded
+##   (dbl), dht (dbl), dwt (dbl), marital (fctr), inc (fctr), smoke (chr),
+##   time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
 </code></pre>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-19" style="background:;">
+<slide class="" id="slide-20" style="background:;">
   <hgroup>
     <h2>Logical Indexing</h2>
   </hgroup>
@@ -400,43 +429,29 @@ babies$drace &lt;- recode(babies$drace,
 <pre><code class="r">babies[babies$bwt &gt; 4.5 &amp; babies$sex.mf == &quot;female&quot;,]
 </code></pre>
 
-<pre><code>##        id pluralty outcome date gestation sex  wt parity  race age ed ht
-## 148  2420        5       1 1687       300   1 160      7 white  29  4 71
-## 240  3906        5       1 1515       293   1 173      6 white  30  2 63
-## 815  7290        5       1 1599       282   1 165      1 white  29  5 66
-## 873  7449        5       1 1574       286   1 164      0 white  32  2 66
-## 926  7581        5       1 1510       289   1 163      0 white  25  4 64
-## 987  7737        5       1 1657       296   1 159      0 white  27  3 64
-## 1116 8098        5       1 1712       297   1 160      1 mixed  20  1 68
-## 1125 8122        5       1 1677       298   1 163      3 white  37  2 61
-## 1163 8323        5       1 1594       291   1 160      3 white  34  1 64
-##      wt1 drace dage ded dht dwt marital  inc              smoke time
-## 148  175 white   38   3  74 205    &lt;NA&gt; &lt;NA&gt;         smokes now    1
-## 240  110 white   38   2  66 145    &lt;NA&gt; &lt;NA&gt;              never    0
-## 815  145 white   29   2  67 125    &lt;NA&gt; &lt;NA&gt;              never    0
-## 873  143 white   31   5  70 160    &lt;NA&gt; &lt;NA&gt;              never    0
-## 926  126 white   31   5  99 999    &lt;NA&gt; &lt;NA&gt;         smokes now    1
-## 987  112 white   36   5  67 150    &lt;NA&gt; &lt;NA&gt;   once but not now    4
-## 1116 136 mixed   31   4  69 165    &lt;NA&gt; &lt;NA&gt;   once but not now    4
-## 1125  98 white   35   1  99 999    &lt;NA&gt; &lt;NA&gt; until current preg    2
-## 1163 110 white   29   5  71 260    &lt;NA&gt; &lt;NA&gt;         smokes now    1
-##      number      bwt sex.mf   sex.jm
-## 148   30-39 4.535919 female Maedchen
-## 240   never 4.904462 female Maedchen
-## 815   never 4.677666 female Maedchen
-## 873   never 4.649317 female Maedchen
-## 926   30-39 4.620967 female Maedchen
-## 987     1-4 4.507569 female Maedchen
-## 1116  10-14 4.535919 female Maedchen
-## 1125    5-9 4.620967 female Maedchen
-## 1163  40-60 4.535919 female Maedchen
+<pre><code>## Source: local data frame [9 x 25]
+## 
+##      id pluralty outcome  date gestation   sex    wt parity  race   age
+##   (dbl)    (dbl)   (dbl) (dbl)     (dbl) (dbl) (dbl)  (dbl) (chr) (dbl)
+## 1  2420        5       1  1687       300     1   160      7 white    29
+## 2  3906        5       1  1515       293     1   173      6 white    30
+## 3  7290        5       1  1599       282     1   165      1 white    29
+## 4  7449        5       1  1574       286     1   164      0 white    32
+## 5  7581        5       1  1510       289     1   163      0 white    25
+## 6  7737        5       1  1657       296     1   159      0 white    27
+## 7  8098        5       1  1712       297     1   160      1 mixed    20
+## 8  8122        5       1  1677       298     1   163      3 white    37
+## 9  8323        5       1  1594       291     1   160      3 white    34
+## Variables not shown: ed (dbl), ht (dbl), wt1 (dbl), drace (chr), dage
+##   (dbl), ded (dbl), dht (dbl), dwt (dbl), marital (fctr), inc (fctr),
+##   smoke (chr), time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
 </code></pre>
 
   </article>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-20" style="background:;">
+<slide class="" id="slide-21" style="background:;">
   <hgroup>
     <h2>Recode Missings</h2>
   </hgroup>
@@ -454,7 +469,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-21" style="background:;">
+<slide class="" id="slide-22" style="background:;">
   <hgroup>
     <h2>Recode Missings</h2>
   </hgroup>
@@ -471,7 +486,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-22" style="background:;">
+<slide class="" id="slide-23" style="background:;">
   <hgroup>
     <h2>Recode Missings</h2>
   </hgroup>
@@ -492,7 +507,7 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-23" style="background:;">
+<slide class="" id="slide-24" style="background:;">
   <hgroup>
     <h2>Exercise</h2>
   </hgroup>
@@ -503,9 +518,67 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue" id="slide-24" style="background:grey;">
+<slide class="" id="slide-25" style="background:;">
   <hgroup>
-    <h1>dplyr</h1>
+    <h2>Solution</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Recode the 99 by <code>NA</code>s in the <code>dage</code> column of the data set.</p>
+
+<pre><code class="r">babies$dage[babies$dage == 99] &lt;- NA
+</code></pre>
+
+<pre><code class="r">summary(babies$dage)
+</code></pre>
+
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   18.00   25.00   29.00   30.35   34.00   62.00       7
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-26" style="background:;">
+  <hgroup>
+    <h2>cut a numeric vector</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Another way of recoding often used is the transformation of a numeric vector into a factor by cutting the numeric vector at specific cut points (breaks).</p>
+
+<p>For example we want to transform the fathers age variable into five-years intervals:</p>
+
+<pre><code class="r">summary(babies$age)
+</code></pre>
+
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   15.00   23.00   26.00   27.26   31.00   45.00       2
+</code></pre>
+
+<pre><code class="r">babies$dage.cat &lt;- cut(babies$dage,
+                      breaks = seq(15,45,by = 5), 
+                      include.lowest = T)
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-27" style="background:;">
+  <hgroup>
+    <h2>Exercise</h2>
+  </hgroup>
+  <article data-timings="">
+    <p>Cut also the mother&#39;s age into five-years intervals. Make a boxplot with mother&#39;s age (use the age groups) on the x-axis and 
+birth weight on the y-axis.</p>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="segue" id="slide-28" style="background:grey;">
+  <hgroup>
+    <h1>Reshaping and summarising data</h1>
   </hgroup>
   <article data-timings="">
     
@@ -513,9 +586,184 @@ babies$drace &lt;- recode(babies$drace,
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-25" style="background:;">
+<slide class="" id="slide-29" style="background:;">
+  <hgroup>
+    <h2>dplyr and reshape2</h2>
+  </hgroup>
   <article data-timings="">
-    
+    <ul class = "build incremental">
+<li>are packages written by Hadley Wickham (like ggplot2)</li>
+<li>they contain lot of functions for data wrangling</li>
+<li>we will begin with simple summarising</li>
+<li>therefore we need the <code>group_by()</code> adn the <code>summarise()</code> function (dplyr)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-30" style="background:;">
+  <hgroup>
+    <h2>dplyr and reshape2</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>first we load the data from the file &quot;kromeyer.rdata&quot; - it is a <code>rdata</code> file - so we use the <code>load()</code> function</li>
+<li>then we group the data frame by the <code>GRP</code> column (scientific group) and calculate the mean of <code>AGE</code></li>
+</ul>
+
+<pre><code class="r">library(dplyr)
+load(&quot;kromeyer.rdata&quot;)
+</code></pre>
+
+<pre><code>## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
+## &#39;kromeyer.rdata&#39;, probable reason &#39;No such file or directory&#39;
+</code></pre>
+
+<pre><code>## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+</code></pre>
+
+<pre><code class="r">kh %&gt;% group_by(GRP) %&gt;%
+  summarise(
+    mean.age = mean(AGE)
+  )
+</code></pre>
+
+<pre><code>## Source: local data frame [52 x 2]
+## 
+##      GRP  mean.age
+##    (chr)     (dbl)
+## 1  A2_01  1.021384
+## 2  A2_02  2.045535
+## 3  A2_03  3.020899
+## 4  A2_04  4.029701
+## 5  A2_05  5.001055
+## 6  A2_06  5.999639
+## 7  A2_07  6.981292
+## 8  A2_08  8.005000
+## 9  A2_09  9.007604
+## 10 A2_10 10.016805
+## ..   ...       ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-31" style="background:;">
+  <hgroup>
+    <h2>dplyr and reshape2</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>we can calculate more than one summary statistic</li>
+</ul>
+
+<pre><code class="r">library(dplyr)
+load(&quot;kromeyer.rdata&quot;)
+</code></pre>
+
+<pre><code>## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
+## &#39;kromeyer.rdata&#39;, probable reason &#39;No such file or directory&#39;
+</code></pre>
+
+<pre><code>## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+</code></pre>
+
+<pre><code class="r">kh %&gt;% group_by(GRP) %&gt;%
+  summarise(
+    mean.age = mean(AGE),
+    sd.age = sd(AGE),
+    mean.bmi = mean(BMI_SDS,na.rm = T)
+  )
+</code></pre>
+
+<pre><code>## Source: local data frame [52 x 4]
+## 
+##      GRP  mean.age    sd.age    mean.bmi
+##    (chr)     (dbl)     (dbl)       (dbl)
+## 1  A2_01  1.021384 0.1330108 -0.15201664
+## 2  A2_02  2.045535 0.1996221  0.20183894
+## 3  A2_03  3.020899 0.2464404  0.19183243
+## 4  A2_04  4.029701 0.2783127  0.02653699
+## 5  A2_05  5.001055 0.2785712 -0.06919697
+## 6  A2_06  5.999639 0.2922610 -0.12445894
+## 7  A2_07  6.981292 0.2847638 -0.12194258
+## 8  A2_08  8.005000 0.2894536 -0.16207127
+## 9  A2_09  9.007604 0.2846261 -0.07326987
+## 10 A2_10 10.016805 0.2841343 -0.04130684
+## ..   ...       ...       ...         ...
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-32" style="background:;">
+  <hgroup>
+    <h2>dplyr and reshape2</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>another way to do the same is</li>
+</ul>
+
+<pre><code class="r">library(reshape2)
+kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
+</code></pre>
+
+<pre><code>## Using SIC, sex, GRP, UID as id variables
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code>##       variable         male       female
+## 1       gebdat 1.145481e+09 1.128765e+09
+## 2         EDAT 1.395447e+09 1.393546e+09
+## 3          AGE 7.926311e+00 8.396155e+00
+## 4      AGE_REF 7.924911e+00 8.392775e+00
+## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02
+## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02
+## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01
+## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01
+## 9     BMI_ORIG 1.811027e+01 1.840815e+01
+## 10     BMI_SDS 1.307451e-01 1.838844e-01
+</code></pre>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
+  <hgroup>
+    <h2>dplyr and reshape2</h2>
+  </hgroup>
+  <article data-timings="">
+    <pre><code class="r">kh %&gt;% melt() %&gt;% dcast(variable ~ sex, margins = &quot;sex&quot;, mean, na.rm = T)
+</code></pre>
+
+<pre><code>## Using SIC, sex, GRP, UID as id variables
+</code></pre>
+
+<pre><code>## Warning: attributes are not identical across measure variables; they will
+## be dropped
+</code></pre>
+
+<pre><code>##       variable         male       female        (all)
+## 1       gebdat 1.145481e+09 1.128765e+09 1.137286e+09
+## 2         EDAT 1.395447e+09 1.393546e+09 1.394515e+09
+## 3          AGE 7.926311e+00 8.396155e+00 8.156653e+00
+## 4      AGE_REF 7.924911e+00 8.392775e+00 8.154282e+00
+## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02 1.265438e+02
+## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02 1.083725e-01
+## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01 3.368533e+01
+## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01 1.758610e-01
+## 9     BMI_ORIG 1.811027e+01 1.840815e+01 1.825634e+01
+## 10     BMI_SDS 1.307451e-01 1.838844e-01 1.568019e-01
+</code></pre>
+
   </article>
   <!-- Presenter Notes -->
 </slide>
@@ -526,13 +774,13 @@ babies$drace &lt;- recode(babies$drace,
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title=''>
+        data-slide=1 title='NA'>
          1
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=2 title='Recap'>
+        data-slide=2 title='Exkurs'>
          2
       </a>
     </li>
@@ -550,13 +798,13 @@ babies$drace &lt;- recode(babies$drace,
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=5 title='Recap factors'>
+        data-slide=5 title='Recap'>
          5
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=6 title='Solution'>
+        data-slide=6 title='Recap factors'>
          6
       </a>
     </li>
@@ -568,55 +816,55 @@ babies$drace &lt;- recode(babies$drace,
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=8 title='change labels'>
+        data-slide=8 title='Solution'>
          8
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=9 title='Exercise'>
+        data-slide=9 title='change labels'>
          9
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=10 title='recoding'>
+        data-slide=10 title='Exercise'>
          10
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=11 title=''>
+        data-slide=11 title='recoding'>
          11
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='Exercise'>
+        data-slide=12 title='NA'>
          12
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=13 title='Solution'>
+        data-slide=13 title='Exercise'>
          13
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=14 title='recoding missings'>
+        data-slide=14 title='Solution'>
          14
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=15 title=''>
+        data-slide=15 title='recoding missings'>
          15
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='Logical Indexing'>
+        data-slide=16 title='NA'>
          16
       </a>
     </li>
@@ -640,7 +888,7 @@ babies$drace &lt;- recode(babies$drace,
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=20 title='Recode Missings'>
+        data-slide=20 title='Logical Indexing'>
          20
       </a>
     </li>
@@ -658,20 +906,68 @@ babies$drace &lt;- recode(babies$drace,
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=23 title='Exercise'>
+        data-slide=23 title='Recode Missings'>
          23
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=24 title='dplyr'>
+        data-slide=24 title='Exercise'>
          24
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=25 title=''>
+        data-slide=25 title='Solution'>
          25
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=26 title='cut a numeric vector'>
+         26
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=27 title='Exercise'>
+         27
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=28 title='Reshaping and summarising data'>
+         28
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=29 title='dplyr and reshape2'>
+         29
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=30 title='dplyr and reshape2'>
+         30
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=31 title='dplyr and reshape2'>
+         31
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=32 title='dplyr and reshape2'>
+         32
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=33 title='dplyr and reshape2'>
+         33
       </a>
     </li>
   </ul>

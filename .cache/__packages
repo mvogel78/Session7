@@ -2,3 +2,12 @@ base
 readxl
 car
 slidify
+zoo
+DescTools
+ggplot2
+DBI
+ROracle
+lubridate
+lifecuration
+dplyr
+reshape2

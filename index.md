@@ -19,6 +19,15 @@ strong {
 </style>
 
 
+
+--- .segue bg:grey
+
+# Exkurs
+
+Graphics (line)
+
+
+
 --- .segue bg:grey
 
 # Recap
@@ -44,6 +53,9 @@ You should know
 ```r
 library(readxl)
 babies <- read_excel("../session7dta/babies.xlsx",1)
+babies$sex.mf <- factor(babies$sex, 
+                        levels = c(0,1),
+                        labels = c("male","female"))
 ```
 
 
@@ -129,22 +141,30 @@ addmargins(prop.table(table(babies$inc,babies$marital),2))
 
 
 
-```r
-babies$sex.jm <- factor(babies$sex.mf, 
-                        levels = c("male","female"),
-                        labels = c("Junge","Maedchen"))
-```
 
-```
-## Error in `$<-.data.frame`(`*tmp*`, "sex.jm", value = structure(integer(0), .Label = c("Junge", : replacement has 0 rows, data has 1236
-```
 
 ```r
-table(babies$sex.jm,babies$sex.mf)
+table(babies$sex.mf)
 ```
 
 ```
-## < table of extent 0 x 0 >
+## 
+##   male female 
+##    626    610
+```
+
+```r
+babies$sex.mj <- factor(babies$sex.mf, 
+                        levels = c("female","male"),
+                          labels = c("Maedchen","Junge"))
+table(babies$sex.mj,babies$sex.mf)
+```
+
+```
+##           
+##            male female
+##   Maedchen    0    610
+##   Junge     626      0
 ```
 
 
@@ -231,7 +251,11 @@ babies[2,1] ## the second element of the first column
 ```
 
 ```
-## [1] 20
+## Source: local data frame [1 x 1]
+## 
+##      id
+##   (dbl)
+## 1    20
 ```
 
 
@@ -244,15 +268,15 @@ babies[1:2,] ## the first two rows
 ```
 
 ```
-##   id pluralty outcome date gestation sex  wt parity  race age ed ht wt1
-## 1 15        5       1 1411       284   0 120      1 asian  27  5 62 100
-## 2 20        5       1 1499       282   1 113      2 white  33  5 64 135
-##   drace dage ded dht dwt marital  inc smoke time number      bwt sex.mf
-## 1 asian   31   5  65 110    <NA> <NA> never    0  never 3.401939   male
-## 2 white   38   5  70 148    <NA> <NA> never    0  never 3.203493 female
-##     sex.jm
-## 1    Junge
-## 2 Maedchen
+## Source: local data frame [2 x 25]
+## 
+##      id pluralty outcome  date gestation   sex    wt parity  race   age
+##   (dbl)    (dbl)   (dbl) (dbl)     (dbl) (dbl) (dbl)  (dbl) (chr) (dbl)
+## 1    15        5       1  1411       284     0   120      1 asian    27
+## 2    20        5       1  1499       282     1   113      2 white    33
+## Variables not shown: ed (dbl), ht (dbl), wt1 (dbl), drace (chr), dage
+##   (dbl), ded (dbl), dht (dbl), dwt (dbl), marital (fctr), inc (fctr),
+##   smoke (chr), time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
 ```
 
 
@@ -263,9 +287,12 @@ babies[1:2,c(1,3)] ## the first and third column for the first two rows
 ```
 
 ```
-##   id outcome
-## 1 15       1
-## 2 20       1
+## Source: local data frame [2 x 2]
+## 
+##      id outcome
+##   (dbl)   (dbl)
+## 1    15       1
+## 2    20       1
 ```
 
 
@@ -284,8 +311,8 @@ babies[1:2,c(1,3)] ## the first and third column for the first two rows
 
 ## Logical Indexing
 
->  - Problem: get all ids of babies with a birth weight > 4
->  - Solution: instead of numbers as indices we use conditions 
+- Problem: get all ids of babies with a birth weight > 4
+- Solution: instead of numbers as indices we use conditions 
 
 
 ```r
@@ -319,11 +346,13 @@ babies[babies$bwt > 5,]
 ```
 
 ```
-##  [1] id        pluralty  outcome   date      gestation sex       wt       
-##  [8] parity    race      age       ed        ht        wt1       drace    
-## [15] dage      ded       dht       dwt       marital   inc       smoke    
-## [22] time      number    bwt       sex.mf    sex.jm   
-## <0 rows> (or 0-length row.names)
+## Source: local data frame [0 x 25]
+## 
+## Variables not shown: id (dbl), pluralty (dbl), outcome (dbl), date (dbl),
+##   gestation (dbl), sex (dbl), wt (dbl), parity (dbl), race (chr), age
+##   (dbl), ed (dbl), ht (dbl), wt1 (dbl), drace (chr), dage (dbl), ded
+##   (dbl), dht (dbl), dwt (dbl), marital (fctr), inc (fctr), smoke (chr),
+##   time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
 ```
 
 
@@ -340,36 +369,22 @@ babies[babies$bwt > 4.5 & babies$sex.mf == "female",]
 ```
 
 ```
-##        id pluralty outcome date gestation sex  wt parity  race age ed ht
-## 148  2420        5       1 1687       300   1 160      7 white  29  4 71
-## 240  3906        5       1 1515       293   1 173      6 white  30  2 63
-## 815  7290        5       1 1599       282   1 165      1 white  29  5 66
-## 873  7449        5       1 1574       286   1 164      0 white  32  2 66
-## 926  7581        5       1 1510       289   1 163      0 white  25  4 64
-## 987  7737        5       1 1657       296   1 159      0 white  27  3 64
-## 1116 8098        5       1 1712       297   1 160      1 mixed  20  1 68
-## 1125 8122        5       1 1677       298   1 163      3 white  37  2 61
-## 1163 8323        5       1 1594       291   1 160      3 white  34  1 64
-##      wt1 drace dage ded dht dwt marital  inc              smoke time
-## 148  175 white   38   3  74 205    <NA> <NA>         smokes now    1
-## 240  110 white   38   2  66 145    <NA> <NA>              never    0
-## 815  145 white   29   2  67 125    <NA> <NA>              never    0
-## 873  143 white   31   5  70 160    <NA> <NA>              never    0
-## 926  126 white   31   5  99 999    <NA> <NA>         smokes now    1
-## 987  112 white   36   5  67 150    <NA> <NA>   once but not now    4
-## 1116 136 mixed   31   4  69 165    <NA> <NA>   once but not now    4
-## 1125  98 white   35   1  99 999    <NA> <NA> until current preg    2
-## 1163 110 white   29   5  71 260    <NA> <NA>         smokes now    1
-##      number      bwt sex.mf   sex.jm
-## 148   30-39 4.535919 female Maedchen
-## 240   never 4.904462 female Maedchen
-## 815   never 4.677666 female Maedchen
-## 873   never 4.649317 female Maedchen
-## 926   30-39 4.620967 female Maedchen
-## 987     1-4 4.507569 female Maedchen
-## 1116  10-14 4.535919 female Maedchen
-## 1125    5-9 4.620967 female Maedchen
-## 1163  40-60 4.535919 female Maedchen
+## Source: local data frame [9 x 25]
+## 
+##      id pluralty outcome  date gestation   sex    wt parity  race   age
+##   (dbl)    (dbl)   (dbl) (dbl)     (dbl) (dbl) (dbl)  (dbl) (chr) (dbl)
+## 1  2420        5       1  1687       300     1   160      7 white    29
+## 2  3906        5       1  1515       293     1   173      6 white    30
+## 3  7290        5       1  1599       282     1   165      1 white    29
+## 4  7449        5       1  1574       286     1   164      0 white    32
+## 5  7581        5       1  1510       289     1   163      0 white    25
+## 6  7737        5       1  1657       296     1   159      0 white    27
+## 7  8098        5       1  1712       297     1   160      1 mixed    20
+## 8  8122        5       1  1677       298     1   163      3 white    37
+## 9  8323        5       1  1594       291     1   160      3 white    34
+## Variables not shown: ed (dbl), ht (dbl), wt1 (dbl), drace (chr), dage
+##   (dbl), ded (dbl), dht (dbl), dwt (dbl), marital (fctr), inc (fctr),
+##   smoke (chr), time (dbl), number (chr), bwt (dbl), sex.mf (fctr)
 ```
 
 
@@ -445,11 +460,260 @@ summary(babies$age)
 
 Recode the 99 by `NA`s in the `dage` column of the data set.
 
---- .segue bg:grey
-
-# dplyr
 
 
 ---
+
+## Solution
+
+
+Recode the 99 by `NA`s in the `dage` column of the data set.
+
+
+
+```r
+babies$dage[babies$dage == 99] <- NA
+```
+
+
+
+```r
+summary(babies$dage)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   18.00   25.00   29.00   30.35   34.00   62.00       7
+```
+
+
+---
+
+## cut a numeric vector
+
+
+Another way of recoding often used is the transformation of a numeric vector into a factor by cutting the numeric vector at specific cut points (breaks).
+
+For example we want to transform the fathers age variable into five-years intervals:
+
+
+```r
+summary(babies$age)
+```
+
+```
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
+##   15.00   23.00   26.00   27.26   31.00   45.00       2
+```
+
+
+
+```r
+babies$dage.cat <- cut(babies$dage,
+                      breaks = seq(15,45,by = 5), 
+                      include.lowest = T)
+```
+
+
+
+---
+
+## Exercise
+
+Cut also the mother's age into five-years intervals. Make a boxplot with mother's age (use the age groups) on the x-axis and 
+birth weight on the y-axis.
+
+
+
+
+--- .segue bg:grey
+
+
+# Reshaping and summarising data
+
+
+---
+
+
+## dplyr and reshape2
+
+>  - are packages written by Hadley Wickham (like ggplot2)
+>  - they contain lot of functions for data wrangling
+>  - we will begin with simple summarising
+>  - therefore we need the `group_by()` adn the `summarise()` function (dplyr)
+
+
+---
+
+
+## dplyr and reshape2
+
+- first we load the data from the file "kromeyer.rdata" - it is a `rdata` file - so we use the `load()` function
+- then we group the data frame by the `GRP` column (scientific group) and calculate the mean of `AGE`
+
+
+
+```r
+library(dplyr)
+load("kromeyer.rdata")
+```
+
+```
+## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
+## 'kromeyer.rdata', probable reason 'No such file or directory'
+```
+
+```
+## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+```
+
+```r
+kh %>% group_by(GRP) %>%
+  summarise(
+    mean.age = mean(AGE)
+  )
+```
+
+```
+## Source: local data frame [52 x 2]
+## 
+##      GRP  mean.age
+##    (chr)     (dbl)
+## 1  A2_01  1.021384
+## 2  A2_02  2.045535
+## 3  A2_03  3.020899
+## 4  A2_04  4.029701
+## 5  A2_05  5.001055
+## 6  A2_06  5.999639
+## 7  A2_07  6.981292
+## 8  A2_08  8.005000
+## 9  A2_09  9.007604
+## 10 A2_10 10.016805
+## ..   ...       ...
+```
+
+
+---
+
+
+## dplyr and reshape2
+
+- we can calculate more than one summary statistic
+
+
+```r
+library(dplyr)
+load("kromeyer.rdata")
+```
+
+```
+## Warning in readChar(con, 5L, useBytes = TRUE): cannot open compressed file
+## 'kromeyer.rdata', probable reason 'No such file or directory'
+```
+
+```
+## Error in readChar(con, 5L, useBytes = TRUE): cannot open the connection
+```
+
+```r
+kh %>% group_by(GRP) %>%
+  summarise(
+    mean.age = mean(AGE),
+    sd.age = sd(AGE),
+    mean.bmi = mean(BMI_SDS,na.rm = T)
+  )
+```
+
+```
+## Source: local data frame [52 x 4]
+## 
+##      GRP  mean.age    sd.age    mean.bmi
+##    (chr)     (dbl)     (dbl)       (dbl)
+## 1  A2_01  1.021384 0.1330108 -0.15201664
+## 2  A2_02  2.045535 0.1996221  0.20183894
+## 3  A2_03  3.020899 0.2464404  0.19183243
+## 4  A2_04  4.029701 0.2783127  0.02653699
+## 5  A2_05  5.001055 0.2785712 -0.06919697
+## 6  A2_06  5.999639 0.2922610 -0.12445894
+## 7  A2_07  6.981292 0.2847638 -0.12194258
+## 8  A2_08  8.005000 0.2894536 -0.16207127
+## 9  A2_09  9.007604 0.2846261 -0.07326987
+## 10 A2_10 10.016805 0.2841343 -0.04130684
+## ..   ...       ...       ...         ...
+```
+
+
+---
+
+
+## dplyr and reshape2
+
+- another way to do the same is
+
+
+
+```r
+library(reshape2)
+kh %>% melt() %>% dcast(variable ~ sex, mean, na.rm = T)
+```
+
+```
+## Using SIC, sex, GRP, UID as id variables
+```
+
+```
+## Warning: attributes are not identical across measure variables; they will
+## be dropped
+```
+
+```
+##       variable         male       female
+## 1       gebdat 1.145481e+09 1.128765e+09
+## 2         EDAT 1.395447e+09 1.393546e+09
+## 3          AGE 7.926311e+00 8.396155e+00
+## 4      AGE_REF 7.924911e+00 8.392775e+00
+## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02
+## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02
+## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01
+## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01
+## 9     BMI_ORIG 1.811027e+01 1.840815e+01
+## 10     BMI_SDS 1.307451e-01 1.838844e-01
+```
+
+
+---
+
+
+## dplyr and reshape2
+
+
+
+
+```r
+kh %>% melt() %>% dcast(variable ~ sex, margins = "sex", mean, na.rm = T)
+```
+
+```
+## Using SIC, sex, GRP, UID as id variables
+```
+
+```
+## Warning: attributes are not identical across measure variables; they will
+## be dropped
+```
+
+```
+##       variable         male       female        (all)
+## 1       gebdat 1.145481e+09 1.128765e+09 1.137286e+09
+## 2         EDAT 1.395447e+09 1.393546e+09 1.394515e+09
+## 3          AGE 7.926311e+00 8.396155e+00 8.156653e+00
+## 4      AGE_REF 7.924911e+00 8.392775e+00 8.154282e+00
+## 5  HEIGHT_ORIG 1.265859e+02 1.265000e+02 1.265438e+02
+## 6   HEIGHT_SDS 1.528759e-01 6.212946e-02 1.083725e-01
+## 7  WEIGHT_ORIG 3.342713e+01 3.395401e+01 3.368533e+01
+## 8   WEIGHT_SDS 1.711122e-01 1.808026e-01 1.758610e-01
+## 9     BMI_ORIG 1.811027e+01 1.840815e+01 1.825634e+01
+## 10     BMI_SDS 1.307451e-01 1.838844e-01 1.568019e-01
+```
 
 
