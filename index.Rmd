@@ -10,16 +10,307 @@ widgets     : [mathjax]            # {mathjax, quiz, bootstrap}
 mode        : selfcontained # {standalone, draft}
 ---
 
-## Read-And-Delete
-
-1. Edit YAML front matter
-2. Write using R Markdown
-3. Use an empty line followed by three dashes to separate slides!
-
---- .class #id 
-
-## Slide 2
+<style>
+strong {
+  font-weight: bold;
+  color: red;
+  font-size: 115%
+}
+</style>
 
 
+--- .segue bg:grey
+
+# Recap
+
+
+---
+
+## Recap
+
+
+You should know
+  - what factor means in R
+  - how to create factors
+
+
+---
+
+## Recap
+
+
+
+```{r}
+library(readxl)
+babies <- read_excel("../session7dta/babies.xlsx",1)
+```
+
+
+--- 
+
+## Recap factors 
+
+- use `factor()` to change the `marital` and `inc` variable from numeric to factor
+  - 1 = married, 2 = legally separated, 3 = divorced, 4 = widowed, 5 = never married
+  - 0 = <2500, 1 = 2500-4999, 2 = 5000-7499, 3 = 7500-9999, ..., 9 = 15000+, 98 = unknown, 99 = not asked
+- table the two variables using `table()` and `prop.table()`; what is the percentage of <2500 amongst married and what amongst never married?
+
+
+---
+
+
+## Solution
+
+```{r}
+babies$marital <- factor(babies$marital, 
+                         levels = 1:5, 
+                         labels = c("married","legally separated",
+                                    "divorced","widowed","never married"))
+babies$inc <- factor(babies$inc,
+                     levels = c(0:9,98,99),
+                     labels = c("<2500",
+                                paste(seq(2500,20000,by = 2500),
+                                       seq(4999,22500,by = 2500),sep = "-"),
+                                "25000+","unknown","not asked"))
+```
+
+
+
+---
+
+
+## Solution
+```{r}
+addmargins(prop.table(table(babies$inc,babies$marital),2))
+```
+
+
+
+---
+
+
+## change labels
+
+
+```{r}
+babies$sex.jm <- factor(babies$sex.mf, 
+                        levels = c("male","female"),
+                        labels = c("Junge","Maedchen"))
+table(babies$sex.jm,babies$sex.mf)
+```
+
+
+
+---
+
+
+## Exercise
+
+Recode the sex variable again. Use `boy` and `girl` as label.
+
+
+---
+
+
+## recoding
+
+>  - another kind of issue is a problem like the following:
+>  - the `drace` variable contains 11 races plus one unknown coding
+>  - coding 0-5 means all white, 6 mex, 7 black, 8 asian, 9 and 10 mixed, 99 unknown
+
+
+
+---
+
+
+```{r}
+
+library(car)
+babies$drace <- recode(babies$drace,
+                       '0:5="white";6="mex";7="black";
+                       8="asian";c(9,10)="mixed";99=NA')
+```
+
+
+
+---
+
+
+## Exercise
+
+- use the variables `race` and `drace` to get the percentage of mixed paires (man and woman from different races)
+
+
+---
+
+
+## Solution
+
+```{r}
+prop.table(table(babies$race == babies$drace))
+```
+
+
+---
+
+
+## recoding missings
+
+- remember how we used numbers to extract parts of vectors and data frames, e.g.
+
+
+```{r}
+babies$id[1] ## the first element of the id-row
+```
+
+
+
+```{r}
+babies[2,1] ## the second element of the first column
+```
+
+
+---
+
+
+```{r}
+babies[1:2,] ## the first two rows
+```
+
+
+
+```{r}
+babies[1:2,c(1,3)] ## the first and third column for the first two rows
+```
+
+
+---
+
+
+## Logical Indexing
+
+>  - Problem: get all ids of babies with a birth weight > 4
+>  - Solution: instead of numbers as indices we use conditions 
+
+
+
+---
+
+
+## Logical Indexing
+
+>  - Problem: get all ids of babies with a birth weight > 4
+>  - Solution: instead of numbers as indices we use conditions 
+
+```{r}
+babies$id[babies$bwt > 4]
+```
+
+
+---
+
+
+## Logical Indexing
+
+- Problem: get all rows of babies with a birth weight > 5
+
+```{r}
+babies[babies$bwt > 5,]
+```
+
+
+---
+
+
+## Logical Indexing
+
+- Problem: get all rows of babie girls with a birth weight > 4.5
+
+```{r}
+babies[babies$bwt > 4.5 & babies$sex.mf == "female",]
+```
+
+
+
+---
+
+
+## Recode Missings
+
+Problem: the `age` and the `dage` column contain 99 to indicate missing. In R a missing is indicated by `NA`.  
+
+
+```{r}
+summary(babies$age)
+```
+
+
+--- 
+
+
+## Recode Missings
+
+Problem: the `age` and the `dage` column contain 99 to indicate missing. In R a missing is indicated by `NA`.  
+
+
+```{r}
+babies$age[babies$age == 99]
+```
+
+
+--- 
+
+
+## Recode Missings
+
+Problem: the `age` and the `dage` column contain 99 to indicate missing. In R a missing is indicated by `NA`.  
+
+
+```{r}
+babies$age[babies$age == 99] <- NA
+```
+
+
+
+```{r}
+summary(babies$age)
+```
+
+
+
+---
+
+## Exercise
+
+
+Recode the 99 by `NA`s in the `dage` column of the data set.
+
+
+
+---
+
+## Solution
+
+
+Recode the 99 by `NA`s in the `dage` column of the data set.
+
+
+```{r}
+babies$dage[babies$dage == 99] <- NA
+```
+
+
+```{r}
+summary(babies$dage)
+```
+
+
+
+--- .segue bg:grey
+
+# dplyr
+
+
+---
 
 
