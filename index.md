@@ -206,6 +206,7 @@ babies$drace <- recode(babies$drace,
 
 ## Exercise
 
+- recode `drace` in the same way
 - use the variables `race` and `drace` to get the percentage of mixed paires (man and woman from different races)
 
 
@@ -644,6 +645,18 @@ kh %>% group_by(GRP) %>%
 
 
 ---
+
+
+---
+
+
+## Exercise
+
+- add the calculation of the mean and the standard deviation of 
+  - `HEIGHT_SDS`
+  - `WEIGHT_SDS`
+  - `BMI_SDS`
+
 
 
 ## dplyr and reshape2

@@ -265,6 +265,7 @@ babies$drace &lt;- recode(babies$drace,
   </hgroup>
   <article data-timings="">
     <ul>
+<li>recode <code>drace</code> in the same way</li>
 <li>use the variables <code>race</code> and <code>drace</code> to get the percentage of mixed paires (man and woman from different races)</li>
 </ul>
 
@@ -700,11 +701,30 @@ load(&quot;kromeyer.rdata&quot;)
 </slide>
 
 <slide class="" id="slide-32" style="background:;">
+  <article data-timings="">
+    
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-33" style="background:;">
   <hgroup>
-    <h2>dplyr and reshape2</h2>
+    <h2>Exercise</h2>
   </hgroup>
   <article data-timings="">
     <ul>
+<li>add the calculation of the mean and the standard deviation of 
+
+<ul>
+<li><code>HEIGHT_SDS</code></li>
+<li><code>WEIGHT_SDS</code></li>
+<li><code>BMI_SDS</code></li>
+</ul></li>
+</ul>
+
+<h2>dplyr and reshape2</h2>
+
+<ul>
 <li>another way to do the same is</li>
 </ul>
 
@@ -736,7 +756,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="" id="slide-33" style="background:;">
+<slide class="" id="slide-34" style="background:;">
   <hgroup>
     <h2>dplyr and reshape2</h2>
   </hgroup>
@@ -774,7 +794,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='NA'>
+        data-slide=1 title=''>
          1
       </a>
     </li>
@@ -840,7 +860,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='NA'>
+        data-slide=12 title=''>
          12
       </a>
     </li>
@@ -864,7 +884,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='NA'>
+        data-slide=16 title=''>
          16
       </a>
     </li>
@@ -960,14 +980,20 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='dplyr and reshape2'>
+        data-slide=32 title=''>
          32
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='dplyr and reshape2'>
+        data-slide=33 title='Exercise'>
          33
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=34 title='dplyr and reshape2'>
+         34
       </a>
     </li>
   </ul>
