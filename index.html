@@ -582,118 +582,13 @@ birth weight on the y-axis.</p>
   <!-- Presenter Notes -->
 </slide>
 
-<slide class="segue" id="slide-29" style="background:grey;">
-  <hgroup>
-    <h1>Reshaping and summarising data</h1>
-  </hgroup>
-  <article data-timings="">
-    
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-30" style="background:;">
-  <hgroup>
-    <h2>dplyr and reshape2</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul class = "build incremental">
-<li>are packages written by Hadley Wickham (like ggplot2)</li>
-<li>they contain lot of functions for data wrangling</li>
-<li>we will begin with simple summarising</li>
-<li>therefore we need the <code>group_by()</code> adn the <code>summarise()</code> function (dplyr)</li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-31" style="background:;">
-  <hgroup>
-    <h2>dplyr and reshape2</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li>first we load the data from the file &quot;kromeyer.rdata&quot; - it is a <code>rdata</code> file - so we use the <code>load()</code> function</li>
-<li>then we group the data frame by the <code>GRP</code> column (scientific group) and calculate the mean of <code>AGE</code></li>
-</ul>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-32" style="background:;">
-  <hgroup>
-    <h2>dplyr and reshape2</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li>we can calculate more than one summary statistic</li>
-</ul>
-
-<pre><code class="r">library(dplyr)
-load(&quot;kromeyer.rdata&quot;)
-
-kh %&gt;% group_by(GRP) %&gt;%
-  summarise(
-    mean.age = mean(AGE),
-    sd.age = sd(AGE),
-    mean.bmi = mean(BMI_SDS,na.rm = T)
-  )
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-33" style="background:;">
-  <hgroup>
-    <h2>Exercise</h2>
-  </hgroup>
-  <article data-timings="">
-    <ul>
-<li>add the calculation of the mean and the standard deviation of 
-
-<ul>
-<li><code>HEIGHT_SDS</code></li>
-<li><code>WEIGHT_SDS</code></li>
-<li><code>BMI_SDS</code></li>
-</ul></li>
-</ul>
-
-<h2>dplyr and reshape2</h2>
-
-<ul>
-<li>another way to do the same is</li>
-</ul>
-
-<pre><code class="r">library(reshape2)
-kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
-<slide class="" id="slide-34" style="background:;">
-  <hgroup>
-    <h2>dplyr and reshape2</h2>
-  </hgroup>
-  <article data-timings="">
-    <pre><code class="r">kh %&gt;% melt() %&gt;% dcast(variable ~ sex, margins = &quot;sex&quot;, mean, na.rm = T)
-</code></pre>
-
-  </article>
-  <!-- Presenter Notes -->
-</slide>
-
     <slide class="backdrop"></slide>
   </slides>
   <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
     <ul>
       <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=1 title='NA'>
+        data-slide=1 title=''>
          1
       </a>
     </li>
@@ -759,7 +654,7 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=12 title='NA'>
+        data-slide=12 title=''>
          12
       </a>
     </li>
@@ -783,13 +678,13 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=16 title='NA'>
+        data-slide=16 title=''>
          16
       </a>
     </li>
     <li>
       <a href="#" target="_self" rel='tooltip' 
-        data-slide=17 title='NA'>
+        data-slide=17 title=''>
          17
       </a>
     </li>
@@ -857,42 +752,6 @@ kh %&gt;% melt() %&gt;% dcast(variable ~ sex, mean, na.rm = T)
       <a href="#" target="_self" rel='tooltip' 
         data-slide=28 title='Exercise'>
          28
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=29 title='Reshaping and summarising data'>
-         29
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=30 title='dplyr and reshape2'>
-         30
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=31 title='dplyr and reshape2'>
-         31
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=32 title='dplyr and reshape2'>
-         32
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=33 title='Exercise'>
-         33
-      </a>
-    </li>
-    <li>
-      <a href="#" target="_self" rel='tooltip' 
-        data-slide=34 title='dplyr and reshape2'>
-         34
       </a>
     </li>
   </ul>
